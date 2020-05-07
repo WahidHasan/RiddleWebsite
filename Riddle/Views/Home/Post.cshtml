@@ -1,0 +1,74 @@
+﻿@model RiddlePost
+@{
+    //ViewData["Title"] = "Post";
+    ViewBag.Title = Model.Title;
+    // ViewBag.Description = "Stroming your brain by solving various types of riddles and increase your self confidence.";
+    //ViewBag.Keywords = $"{Model.Tags?.Replace("," , " ")} {Model.RiddleType}";
+}
+
+<div class="container-fluid" style="padding-top:55px;">
+    <h1 style="color:darkcyan;">@Model.Title</h1>
+    @*  @if(!String.IsNullOrEmpty(Model.Image))
+        {
+            var image_path = $"/Image/{Model.Image}";
+            <img  src="@image_path" width="500"/>
+        } *@
+    <div>
+        @Html.Raw(Model.QuestionDetails)
+    </div>
+    <div>
+        <input type="button" value="Answer" id="answerButton"/> 
+    </div>
+    <div id="answerDisplay">
+
+    </div>
+   
+    <div>
+        @{
+            await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = 0 });
+        }
+        @foreach (var c in Model.MainComments)
+        {
+            <p>  @c.Message  @c.Created </p>
+            <div>
+                <h4>Sub Comments</h4>
+                @{
+                    await Html.RenderPartialAsync("_MainComment", new CommentViewModel { PostId = Model.Id, MainCommentId = c.Id });
+                }
+
+                @foreach (var sc in c.SubComments)
+                {
+                <p>  @sc.Message  @sc.Created </p>
+                }
+            </div>
+        }
+    </div>
+    
+
+</div>
+
+@section scripts{
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+             var id_no = @Model.Id;
+            $('#answerButton').click(function () {
+                @*var id_no = @Model.Id;*@
+                $.ajax({
+                    type: 'GET',
+                    url:  '@Url.Action("Answer")',
+                    dataType: "html",
+                    data: { Id: id_no },
+                    success: function (result) {
+                        $('#answerDisplay').html(result);
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+                    }
+               });
+           });
+        });
+
+    
+    </script>
+}

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<RiddlePost>
+@{
+    //ViewData["Title"] = "Index";
+    ViewBag.Title = "Riddle Website";
+    ViewBag.Description = "Stroming your brain by solving various types of riddles and increase your self confidence.";
+    ViewBag.Keywords = "Riddle IQ BrainStorming Interview";
+    
+}
+
+<div class="container">
+    
+    
+    
+    <div class="card-deck">
+        @foreach (var post in Model)
+        {
+            @* <li>
+                <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id">
+                    @post.Title
+                </a>
+            </li>*@
+            <a asp-controller="Home" asp-action="Post" asp-route-id="@post.Id" >
+                
+
+                    <div class="card border-info m-4" style="min-width:18rem; max-width:30.5%;">
+                        <div class="card-body text-info">
+                            <h6>@post.Title</h6>
+                        </div>
+                    </div>
+
+                
+            </a>
+        }
+    </div>
+   
+    
+</div>
+

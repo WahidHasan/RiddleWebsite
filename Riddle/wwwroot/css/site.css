@@ -1,0 +1,32 @@
+﻿.btn {
+    width: 80px;
+}
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+    
+}
+div.card:hover{
+    background-color:beige;
+}
+a:link, a:hover {
+    text-decoration:none;   
+}
+div input[type=button] {
+    background-color: #7575a3;
+    border-radius: 5px;
+    
+    color: cornsilk;
+    cursor: pointer;
+}
+.sign-in-form {
+    margin-top:2rem;
+    display: flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+.sign-in-form div{
+    max-width:200px;
+    width: 100%;
+    margin-bottom: 1rem;
+}

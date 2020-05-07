@@ -1,0 +1,42 @@
+﻿@model RiddlePost
+@{
+    ViewData["Title"] = "Edit";
+}
+<link href="~/lib/Trumbowyg-master/dist/ui/trumbowyg.min.css" rel="stylesheet" />
+<div>
+    <form asp-controller="Panel" asp-action="Edit" method="post" enctype="multipart/form-data">
+        <input asp-for="Id" type="hidden" />
+        <div>
+            <label asp-for="Title"></label>
+            <input asp-for="Title" />
+        </div>
+        <div>
+            <label asp-for="RiddleType"></label>
+            <select asp-for="RiddleType" asp-items="Html.GetEnumSelectList<RiddleType>()">
+                <option value="">Please Select</option>
+            </select>
+        </div>
+        <div>
+            <label asp-for="QuestionDetails">Question Details</label>
+            <textarea id="QDetails" asp-for="QuestionDetails"></textarea>
+        </div>
+        <div>
+            <label>Answer</label>
+            <textarea id="Answer" asp-for="Answer"></textarea>
+        </div>
+        
+        <div>
+            <button class="btn btn-dark">Post</button>
+        </div>
+    </form>
+</div>
+
+@section scripts{
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="~/lib/Trumbowyg-master/dist/trumbowyg.min.js"></script>
+    <script>
+        $('#QDetails').trumbowyg();
+        $('#Answer').trumbowyg();
+    </script>
+}
+

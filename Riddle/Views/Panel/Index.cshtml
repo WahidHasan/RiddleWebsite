@@ -1,0 +1,31 @@
+﻿@model IEnumerable<RiddlePost>
+@{
+    ViewData["Title"] = "Index";
+    
+}
+<h2 style="align-content:center">Admin Panel</h2>
+<div class="container">
+    <a asp-controller="Panel" asp-action="Edit">Create Post</a>
+</div>
+<div class="container">
+    <h3>All Riddles</h3>
+    <ul>
+        @foreach(var post in Model)
+        {
+        <li>
+            
+             @post.Title
+            
+            -
+            <a asp-controller="Panel" asp-action="Edit" asp-route-id="@post.Id">
+                <button>Edit</button>
+            </a>
+            -
+            <a asp-controller="Panel" asp-action="Delete" asp-route-id="@post.Id">
+                <button>Delete</button>
+            </a>
+        </li>
+        }
+    </ul>
+</div>
+
